@@ -1,0 +1,52 @@
+@font-face{
+	font-family:greatvibes;
+	src: url('../fonts/GreatVibes-Regular.ttf');
+}
+@font-face{
+	font-family:gameof;
+	src: url('../fonts/GameofThrones.ttf');
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+	display: flex;
+	
+}
+
+.main {
+	align-items: center;
+	background-image: url(../assets/map/mapblue.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 75%;
+}
+
+.portrait {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem;
+	width: 12.5%;
+}
+
+.aside_left {
+	 background-color: #2c2929;
+	 color: #fff;
+	 text-align: center;
+	 font-family: gameof;
+	 font-size: .7rem;
+	 padding-top: 2rem;
+	 width: 25%;
+ }
