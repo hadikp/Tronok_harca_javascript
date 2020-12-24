@@ -1,6 +1,6 @@
 @font-face{
-	font-family:greatvibes;
-	src: url('../fonts/GreatVibes-Regular.ttf');
+	font-family:robotoo;
+	src: url('../fonts/RobotoSlab-VariableFont_wght.ttf');
 }
 @font-face{
 	font-family:gameof;
@@ -41,11 +41,40 @@ body {
 }
 
 .aside_left {
+	position: relative;
 	 background-color: #2c2929;
 	 color: #fff;
 	 text-align: center;
-	 font-family: gameof;
+	 font-family: robotoo;
 	 font-size: .7rem;
 	 padding-top: 2rem;
 	 width: 25%;
+ }
+
+ .aside_left h1 {
+	 font-family: gameof;
+ }
+ .aside_figcaption_div {
+	 justify-content: space-between;
+	 display: flex;
+	 flex-direction: row;
+	 font-family: robotoo;
+	 font-size: 1rem;
+	 margin: 10px;
+ }
+
+ .bio {
+	text-align: justify;
+	margin: 10px;
+ }
+
+ .search {
+	 width: 100%;
+	 position: absolute;
+	 bottom: 20px;
+ }
+ .search i {
+	 position: absolute;
+	 left: 0px;
+    top: 0;
  }
