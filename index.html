@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trónok Harca</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
    <div class="container">
@@ -23,14 +23,16 @@
                <div class="bio"></div>
            </div>
            <div class="search">
-                <button class="btn_submit" type="submit">+</button>
-                <i class="fa fa-search"></i>
-                <input class="input_plus" type="text" name="tev" id="tev" value="search" placeholder='search' required>
-                
-            
+               <div class="btn_search">
+                    <button class="btn_submit" type="submit"><i class="fa fa-angle-right fa-2x"></i></button>
+               </div>
+               <div class="search_fa_input">
+                    <i class="fa fa-search"></i>
+                    <input class="aside_input" type="text" placeholder='Search a character' required>
+               </div>
            </div>
        </div>
    </div> 
-<script src="/js/got.js"></script>
+<script src="js/got.js"></script>
 </body>
 </html>

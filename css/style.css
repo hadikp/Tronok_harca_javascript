@@ -69,12 +69,32 @@ body {
  }
 
  .search {
+	 display: flex;
 	 width: 100%;
 	 position: absolute;
 	 bottom: 20px;
  }
- .search i {
+ .search_fa_input i {
+	 font-size: 1rem;
 	 position: absolute;
-	 left: 0px;
-    top: 0;
+	 left: 6.5rem;
+	 top: 12px;
+     color: #000;
+ }
+
+ .btn_submit {
+	 background-color: #000;
+	 border: 2px solid #fff;
+	 color: #fff;
+
+ }
+
+ .btn_search {
+	 margin: 0 40px 0 30px;
+ }
+
+ .aside_input {
+	 font-size: .7rem;
+	 padding: 10px 25px;
+	 width: 16rem;
  }

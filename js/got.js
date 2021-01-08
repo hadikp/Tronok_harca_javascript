@@ -1,6 +1,8 @@
 'use strict';
 let lastName;
-let imgBig;
+let imgSrc;
+let nameSplit;
+let findSearch = true;
 
 //Json file beolvasása
 async function getGot(url, options = {}) {
@@ -12,8 +14,11 @@ async function getGot(url, options = {}) {
         console.error(error);
     }
 }
-getGot('/json/got.json');
+getGot('json/got.json');
 
+function run () {
+
+}
 //Karakterek profilképének megjelenítése
 function charData(response) {
     //A halottakat kiszedem a tömbből
@@ -23,9 +28,7 @@ function charData(response) {
         const name_split = item.name.split(' '); //name-t szétszplitteltem  elem_dead.map(item =>item.name.split(' '));
         if (name_split[1] === undefined) {
              lastName = name_split[0];
-        } else {
-            lastName = name_split[1];
-        }
+        } else lastName = name_split[1];
         item.lastName = lastName;
      });
      
@@ -35,7 +38,7 @@ function charData(response) {
          let textB = b.lastName;
          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
      })
-     console.log(elem_dead); 
+     console.log(elem_dead);//Törölni!!!!!!!!!!!!!!!!!!!!!!!!! 
     
     //elemek kirakva a DOM-ba
      for (let i = elem_dead.length-1; i >= 0; i --) { 
@@ -47,27 +50,62 @@ function charData(response) {
      }
      //nagyképet kirakom jobbra az aside_left-be
      const imgEvent = (event) => {
-       const imgSrc = event.currentTarget.firstChild.getAttribute('src'); //kisképek elérési útjának kinyerése
-       elem_dead.forEach(item => {
-           if (imgSrc === item.portrait) {
-               if (item.picture === undefined) {
-                   item.picture = 'assets/pictures/placeholder.jpg';
-               }
-            document.querySelector('.picture_img').src = item.picture;
-            document.querySelector('.aside_figcaption').textContent = item.name;
-            if (item.house != undefined) {
-                document.querySelector('.aside_figcaption_img').src = `assets/houses/${item.house}.png`; //ház cimere
+            if (event) { //A click esemény létezik?
+                imgSrc = event.currentTarget.firstChild.getAttribute('src'); //kisképek elérési útjának kinyerés
             }
-            document.querySelector('.bio').textContent = item.bio;
+       elem_dead.forEach(item => { //nagyképek keresése
+           if (imgSrc === item.portrait) { 
+                    if (item.picture === undefined) {
+                        item.picture = 'assets/pictures/placeholder.jpg';
+                    }
+                document.querySelector('.picture_img').src = item.picture;
+                document.querySelector('.aside_figcaption').textContent = item.name;
+                    if (item.house != undefined) {
+                        document.querySelector('.aside_figcaption_img').src = `assets/houses/${item.house}.png`; //ház cimere
+                    }
+                document.querySelector('.bio').textContent = item.bio;
            }
        })
       // document.querySelector('img[src="assets/petyr.png"]').addEventListener('click', c); 
     }
+
      //Kiválasztom a nagyítandó képet a kisképekre klikkelve
      document.querySelectorAll('.portrait').forEach(element => {
         element.addEventListener('click', imgEvent)});
+    
+    //Search mező az aside alján
+    document.querySelector('.btn_search').addEventListener('click', search);
+
+   function search() {
+        let inputValue = document.querySelector('.aside_input').value.split(' ');
+        //Ha csak 1 név van ehhez kell
+        if (inputValue[1] === undefined) {
+            inputValue = `${inputValue[0].toLocaleUpperCase()}`;
+        } else inputValue = `${inputValue[0].toLocaleUpperCase()} ${inputValue[1].toLocaleUpperCase()}`;
         
-     imgEvent();
+        //Name-ból megkeresem az imgSrc-t(kiskép elérési útvonala), kis-nagy betű nem számít
+        findSearch = false;
+        elem_dead.forEach(item => {
+            
+            nameSplit = item.name.split(' ');
+            if (nameSplit[1] === undefined) {
+                nameSplit = `${nameSplit[0].toLocaleUpperCase()}`;
+            } else nameSplit = `${nameSplit[0].toLocaleUpperCase()} ${nameSplit[1].toLocaleUpperCase()}`;
+            //Összehasonlítja a karakterek nevét az input mezőbe gépelttel
+            if ( JSON.stringify(inputValue) === JSON.stringify(nameSplit)) {
+                imgSrc = item.portrait;
+                findSearch = true;
+                imgEvent();
+            } 
+        }); 
+
+        if (findSearch === false) {
+                document.querySelector('.picture_img').src = '';
+                document.querySelector('.aside_figcaption').textContent = 'Nincs ilyen karakter';
+                document.querySelector('.bio').textContent = '';
+                document.querySelector('.aside_figcaption_img').src = '';
+        }
+    }   
 }
 
 
